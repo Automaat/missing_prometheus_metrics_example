@@ -1,0 +1,14 @@
+[
+  {
+    "name": "mongo_proxy",
+    "listen": "[::]:20000",
+    "upstream": "order_mongo:27017",
+    "enabled": true
+  },
+  {
+    "name": "order_proxy",
+    "listen": "[::]:20001",
+    "upstream": "order_service:8080",
+    "enabled": true
+  }
+]

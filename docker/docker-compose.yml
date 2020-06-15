@@ -1,0 +1,52 @@
+version: '3'
+services:
+  proxy:
+    image: shopify/toxiproxy
+    container_name: proxy
+    command: "-host=0.0.0.0 -config=/opt/toxiproxy/toxiproxy.json"
+    ports:
+      - "8474:8474"
+      - "20000:20000"
+      - "20001:20001"
+    volumes:
+      - "./provisioning/toxiproxy/:/opt/toxiproxy/"
+  mongo:
+    image: mongo:4.0
+    container_name: order_mongo
+    ports:
+      - "127.0.0.1:27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=order_local_db
+    volumes:
+      - "./provisioning/:/docker-entrypoint-initdb.d/"
+  order_service:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    depends_on:
+      - order_service
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./provisioning/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "./provisioning/prometheus/rules.yml:/etc/prometheus/rules.yml"
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+    - "./provisioning/grafana:/var/lib/grafana"
+  load_tests:
+    build:
+      context: ../load-tests
+      dockerfile: Dockerfile
+    depends_on:
+      - order_service

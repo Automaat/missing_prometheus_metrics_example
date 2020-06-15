@@ -1,0 +1,2 @@
+mongo:
+  hosts: "proxy:20000"

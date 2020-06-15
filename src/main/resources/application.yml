@@ -1,0 +1,27 @@
+mongo:
+  user: "order_local"
+  password: "order_local"
+  hosts: "localhost:27017"
+  database: "order_local_db"
+
+spring:
+  data:
+   mongodb:
+    uri: mongodb://${mongo.user}:${mongo.password}@${mongo.hosts}/${mongo.database}?socketTimeoutMS=300&connectTimeoutMS=100&retryWrites=false&serverSelectionTimeoutMS=10000
+    connectTimeout: 100
+    socketTimeout: 400
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,prometheus
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true

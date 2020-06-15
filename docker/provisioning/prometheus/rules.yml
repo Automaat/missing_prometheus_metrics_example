@@ -1,0 +1,17 @@
+groups:
+  - name: order_statistics
+    rules:
+      - record: mongo_p99
+        expr: histogram_quantile(0.99, sum(rate(mongo_seconds_bucket[1m])) by (operation, le))
+      - record: mongo_p50
+        expr: histogram_quantile(0.5, sum(rate(mongo_seconds_bucket[1m])) by (operation, le))
+      - record: mongo_success_rate
+        expr: rate(mongo_total{status="success"}[1m])
+      - record: mongo_failure_rate
+        expr: rate(mongo_total{status="failure"}[1m])
+      - record: endpoint_p50
+        expr: histogram_quantile(0.5, sum(rate(endpoint_seconds_bucket[1m])) by (name, le))
+      - record: endpoint_p99
+        expr: histogram_quantile(0.99, sum(rate(endpoint_seconds_bucket[1m])) by (name, le))
+      - record: endpoint_m1_rate
+        expr: rate(endpoint_seconds_count[1m])

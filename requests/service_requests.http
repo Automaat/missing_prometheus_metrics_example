@@ -1,0 +1,14 @@
+POST http://localhost:20001/orders
+Content-Type: application/json
+
+{
+  "items":  ["12345", "432"],
+  "value": 100
+}
+
+###
+GET http://localhost:20001/orders/c2bb400b-78a8-41ff-a9ae-c36a47f0511d
+
+###
+
+POST http://localhost:20001/orders/c2bb400b-78a8-41ff-a9ae-c36a47f0511d/paid

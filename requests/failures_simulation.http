@@ -1,0 +1,18 @@
+### create latency toxic for mongo proxy
+POST http://localhost:8474/proxies/mongo_proxy/toxics
+Content-Type: application/json
+
+{
+  "type": "latency",
+  "attributes": {
+    "latency": 500,
+    "jitter": 10
+  }
+}
+
+### Get toxics for mongo proxy
+
+GET http://localhost:8474/proxies/mongo_proxy/toxics
+
+### Delete mongo_proxy latency toxic
+DELETE http://localhost:8474/proxies/mongo_proxy/toxics/latency_downstream
