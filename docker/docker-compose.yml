@@ -44,9 +44,9 @@ services:
       - "3000:3000"
     volumes:
     - "./provisioning/grafana:/var/lib/grafana"
-  load_tests:
-    build:
-      context: ../load-tests
-      dockerfile: Dockerfile
-    depends_on:
-      - order_service
+#  load_tests:
+#    build:
+#      context: ../load-tests
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - order_service

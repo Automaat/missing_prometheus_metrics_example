@@ -1,4 +1,4 @@
-POST http://localhost:20001/orders
+POST http://localhost:8080/orders
 Content-Type: application/json
 
 {
@@ -7,8 +7,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:20001/orders/c2bb400b-78a8-41ff-a9ae-c36a47f0511d
+GET http://localhost:8080/orders/67941ecb-9394-453e-a8fe-87586934f365
 
 ###
-
 POST http://localhost:20001/orders/c2bb400b-78a8-41ff-a9ae-c36a47f0511d/paid
+
+
+###
+GET http://localhost:8080/actuator/prometheus

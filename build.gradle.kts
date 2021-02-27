@@ -26,6 +26,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 //    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+    // https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-graphite
+    runtimeOnly("io.micrometer:micrometer-registry-graphite:1.5.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
